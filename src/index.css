@@ -1,0 +1,63 @@
+@import "@flaticon/flaticon-uicons/css/all/all";
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	html {
+		font-family: 'DM Sans', sans-serif !important;
+		font-feature-settings: 'kern' !important;
+		-webkit-font-smoothing: antialiased;
+		letter-spacing: -0.5px;
+	}
+}
+
+input.defaultCheckbox::before {
+	content: url(../src/assets/svg/checked.svg); 
+	color: white;
+	opacity: 0; 
+	height: 16px; 
+	width: 16px;
+	position: absolute; 
+	left: 50%;
+	transform: translate(-50%, 0px);
+} 
+
+input:checked.defaultCheckbox::before { 
+	opacity: 1;
+}
+.hide-scroll-bar::-webkit-scrollbar{
+	display: none;
+}
+
+.leaflet-popup-content-wrapper{
+padding: 0px !important;
+}
+
+.leaflet-popup-content{
+	margin: 0 !important;
+}
+.sx__calendar{
+	height: calc(100vh - 200px) !important;
+	overflow: hidden !important;
+}
+.sx__calendar::-webkit-scrollbar{
+	display: none !important;
+}
+.sx__view-container::-webkit-scrollbar{
+display: none !important;
+}
+.no-scroll-bar::-webkit-scrollbar{
+display: none !important;	
+}
+
+/* .sx__event-modal.sx__event-modal-default.is-open::-webkit-scrollbar{
+display: none;
+} */
+
+
+.link{
+	@apply text-navy-700 flex justify-between items-center gap-2 hover:text-navy-700 dark:text-white dark:hover:text-white;
+}
