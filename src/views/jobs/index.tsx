@@ -1,4 +1,5 @@
-
+/* eslint-disable @typescript-eslint/ban-ts-comment */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Select,
   SelectContent,
@@ -22,16 +23,18 @@ const JobList = () => {
   const [itemsPerPage, setItemsPerPage] = useState(12);
   const [sorting, setSorting] = useState("default");
   const [currentPage, setCurrentPage] = useState(1);
-  const [isFirstLoad, setIsFirstLoad] = useState(true); 
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
   const filterRef = useRef(null);
 
-  const { data: jobs, isLoading, isFetching } = useGetJobs(
-    currentPage,
-    itemsPerPage
-  );
+  const {
+    data: jobs,
+    isLoading,
+    isFetching,
+  } = useGetJobs(currentPage.toString(), itemsPerPage.toString());
 
   useEffect(() => {
     const handleClickOutside = (event: any) => {
+      //@ts-ignore
       if (filterRef.current && !filterRef.current.contains(event.target)) {
         setShowFilter(false);
       }
@@ -44,7 +47,6 @@ const JobList = () => {
     };
   }, []);
 
-
   useEffect(() => {
     if (!isFirstLoad) {
       console.log("Data updated due to page size or sorting changes.");
@@ -52,8 +54,7 @@ const JobList = () => {
       console.log("First time load.");
     }
     if (!isLoading) {
-      
-      setIsFirstLoad(false); 
+      setIsFirstLoad(false);
     }
   }, [currentPage, itemsPerPage]);
 
@@ -66,7 +67,8 @@ const JobList = () => {
       {/* Header Section */}
       <div className="md:py-[40px] rounded-xl w-full flex gap-[20px] flex-col items-center justify-center">
         <p className="md:text-[50px] md:text-start text-center text-[35px] font-[600]">
-          There Are <span className="text-brand-400">{jobs?.totalItems}</span> Postings Here For you!
+          There Are <span className="text-brand-400">{jobs?.totalItems}</span>{" "}
+          Postings Here For you!
         </p>
         <p>Find Jobs, Employment & Career Opportunities</p>
         <div className="bg-white md:flex hidden border px-[30px] gap-[10px] rounded-[8px] shadow-sm justify-center items-center w-full xl:max-w-[1600px] h-[100px]">

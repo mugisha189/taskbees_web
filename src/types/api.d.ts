@@ -22,16 +22,16 @@ export interface RegisterRequest {
   email: string;
   password: string;
   role: string;
-  confirmPassword:string
+  confirmPassword: string;
 }
-export interface registerEmployeeRequest{
+export interface registerEmployeeRequest {
   company_name: string;
   email: string;
   password: string;
   role: string;
-  confirmPassword:string
+  confirmPassword: string;
 }
-export interface RegisterBusinessRequest{
+export interface RegisterBusinessRequest {
   email: string;
   country: string;
   companyName: string;
@@ -39,7 +39,7 @@ export interface RegisterBusinessRequest{
   confirmPassword: string;
 }
 
-export interface UpdateRequest{
+export interface UpdateRequest {
   username?: string;
   firstName?: string;
   lastName?: string;
@@ -51,17 +51,15 @@ export interface UpdateRequest{
 }
 
 export interface ProfileResponse extends Response {
-  
   payload: ProfilePayload;
- 
 }
 export interface ProfilePayload {
   profile: UserProfile;
-  awards: any[]; 
-  educations: any[]; 
-  experiences: any[]; 
-  additional_info: any[]; 
-  events: any[]; 
+  awards: any[];
+  educations: any[];
+  experiences: any[];
+  additional_info: any[];
+  events: any[];
 }
 export interface LoginRequest {
   email: string;
@@ -71,31 +69,30 @@ export interface Response {
   success: boolean;
   path: string;
   method: string;
-  message:string
+  message: string;
 }
-export interface UserResponse extends Response{
+export interface UserResponse extends Response {
   payload: {
-    
-  user: User
-  }
+    user: User;
+  };
 }
 
 export interface UserProfile {
   id: string;
-  createdAt: string; 
-  updatedAt: string; 
+  createdAt: string;
+  updatedAt: string;
   fullnames: string;
   email: string;
   role: UserRole;
   status: UserStatus;
   gender: string;
   profilePhoto: string;
-  date_of_birth: string; 
+  date_of_birth: string;
   age: number;
   phoneNumber: string[];
   qualification: Qualification;
   experience_time: ExperienceTime;
-  languages: string[]; 
+  languages: string[];
   salary_type: SalaryType;
   salary: number;
   profile_show: ProfileVisibility;
@@ -103,42 +100,38 @@ export interface UserProfile {
   description: string[];
   portifolio: string[];
   resume: string;
-  social_networks: string[]; 
+  social_networks: string[];
   location: string;
-  video_url: string; 
-  latitude:string;
+  video_url: string;
+  latitude: string;
   longitude: string;
 }
-export interface Education{
+export interface Education {
   institution: string;
   title: string;
   start_date: string;
-  degree:string
+  degree: string;
   end_date: string;
 }
 
-export interface Certificate{
+export interface Certificate {
   issuedBy: string;
   description: string;
   issueDate: string;
   description: string;
-
-
 }
 
-export interface Award{
+export interface Award {
   title: string;
   description: string;
   award_date: string;
 }
 
-
-
-export interface Experience{
+export interface Experience {
   title: string;
   start_date: string;
   end_date: string;
-  description:string
+  description: string;
 }
 
 export interface User {
@@ -146,8 +139,6 @@ export interface User {
   experiences?: Experience[];
   awards?: Award[];
   profile: UserProfile;
-
-  
 }
 
 export interface AuthUser {
@@ -169,7 +160,7 @@ export interface RefreshTokenResponse extends Response {
       accessToken: string;
       refreshToken: string;
     };
-  }
+  };
 }
 
 export interface AuthResponse extends Response {
@@ -181,12 +172,11 @@ export interface AuthResponse extends Response {
     };
   };
 }
-export interface ResetTokenResponse extends Response{
-  payload:{
-    resetToken:string
-  }
+export interface ResetTokenResponse extends Response {
+  payload: {
+    resetToken: string;
+  };
 }
-
 
 export interface AllUsersResponse extends Response {
   payload: {
@@ -198,7 +188,6 @@ export interface AllUsersResponse extends Response {
     currentPage: number;
   };
 }
-
 
 export interface LandRequest {
   province: string;
@@ -218,8 +207,6 @@ export interface LandRequest {
   additionalInfo: string[];
   images: File[];
 }
-
-
 
 export interface CarRequest {
   province: string;
@@ -262,7 +249,7 @@ export interface EstateRequest {
   swimmingpools: number;
   type: EstateType;
   construction_stage: EConstructionStage;
-  estate_use: EstateCommercial|EstateResidential;
+  estate_use: EstateCommercial | EstateResidential;
   accessibility: string;
   key_features: string[];
   build_year: string;
@@ -273,23 +260,23 @@ export interface EstateRequest {
   mortgage_fees: number;
   images: File[];
 }
-interface commonItemFeature{
+interface commonItemFeature {
   id: string;
   images: string[];
-  province: string,
-  district: string,
-  sector: string,
-  cell: string,
-  owner: string,
+  province: string;
+  district: string;
+  sector: string;
+  cell: string;
+  owner: string;
   name: string;
   addInfo: string[];
   type: "land" | "car" | "estate";
 }
 export type Item =
   | {
-    id: string;
-    latitude?: number,
-    longitude?:number,
+      id: string;
+      latitude?: number;
+      longitude?: number;
       images: string[];
       province: string;
       district: string;
@@ -298,15 +285,15 @@ export type Item =
       owner: string;
       name: string;
       addInfo: string[];
-    type: "land";
+      type: "land";
       user: User;
       property: LandRequest;
       [key: string]: any;
     }
   | {
-    id: string;
-    latitude?: number,
-    longitude?:number,
+      id: string;
+      latitude?: number;
+      longitude?: number;
       images: string[];
       province: string;
       district: string;
@@ -314,16 +301,16 @@ export type Item =
       cell: string;
       owner: string;
       name: string;
-    addInfo: string[];
+      addInfo: string[];
       user: User;
       type: "estate";
       property: EstateRequest;
       [key: string]: any;
     }
   | {
-    id: string;
-    latitude?: number;
-    longitude?: number;
+      id: string;
+      latitude?: number;
+      longitude?: number;
       images: string[];
       province: string;
       district: string;
@@ -339,15 +326,12 @@ export type Item =
     };
 
 export interface AllPropertiesResponse extends Response {
-
-    items: Item[];
-    itemCount: number;
-    totalItem: number;
-    totalPages: number;
-    currentPage: number;
-  
+  items: Item[];
+  itemCount: number;
+  totalItem: number;
+  totalPages: number;
+  currentPage: number;
 }
-
 
 export interface PropertyQueryParams {
   page: number;
@@ -373,26 +357,24 @@ export interface PropertyQueryParams {
   land?: boolean;
 }
 
-
-export interface UserWithProperty extends Response{
+export interface UserWithProperty extends Response {
   payload: {
     user: {
       id: string;
-      email: string,
-      firstName: string,
-      lastName: string,
-      phoneNumber: string,
-      profilePhoto: string[],
-      username: string,
-      createdAt: Date,
-      updatedAt: Date,
+      email: string;
+      firstName: string;
+      lastName: string;
+      phoneNumber: string;
+      profilePhoto: string[];
+      username: string;
+      createdAt: Date;
+      updatedAt: Date;
       properties: Item[];
     };
-  }
+  };
 }
 
-
-export  interface UpdateCandidateData {
+export interface UpdateCandidateData {
   gender: string;
   id: string;
   experience_time: string;
@@ -414,13 +396,11 @@ export  interface UpdateCandidateData {
   email: string;
   description: string;
   age: number;
-  portifolio:any
-  education:any
-  awards:any
-  experience:any
+  portifolio: any;
+  education: any;
+  awards: any;
+  experience: any;
 }
-
-
 
 interface JobPostData {
   photos: File[];
@@ -429,7 +409,7 @@ interface JobPostData {
   gender: string;
   career_level: string;
   max_salary: number;
-  application_deadline: string; 
+  application_deadline: string;
   experience: string;
   job_salary: string;
   job_apply_type: string;
@@ -437,7 +417,7 @@ interface JobPostData {
   location: string;
   job_title: string;
   min_salary: number;
-  job_tag: string[]; 
+  job_tag: string[];
   job_email: string;
   external_url: string;
   intro_url: string;
@@ -446,7 +426,7 @@ interface JobPostData {
   skills: string[];
   responsibilities: string[];
   category: string;
-  aggreement:string;
+  aggreement: string;
 }
 
 export interface Company {
@@ -459,7 +439,7 @@ export interface Company {
   founded_date: string | null;
   company_size: string | null;
   description: string | null;
-  role:"EMPLOYER"|"CANDIDATE"|"BUSINESS";
+  role: "EMPLOYER" | "CANDIDATE" | "BUSINESS";
   company_logo: string | null;
   cover_photo: string | null;
   company_photos: string[] | null;
@@ -473,14 +453,14 @@ export interface Company {
   status: string | null;
 }
 
-export interface CompanyResponse extends Response{
-  payload:Company
-  
+export interface CompanyResponse extends Response {
+  payload: Company;
 }
 
 export interface Job {
   id: string;
   featured_image?: string;
+  has_applied?: boolean;
   job_title: string;
   description: string[];
   job_apply_type: string;
@@ -516,17 +496,14 @@ export interface JobsResponse {
   timestamp: number;
 }
 
-
 export interface JobPayload {
   items: Job[];
   itemCount: number;
   totalItems: number;
   itemsPerPage: number;
   totalPages: number;
-  currentPage: string; 
+  currentPage: string;
 }
-
-
 
 // {
 //   "company_name": "NaviGO",
@@ -550,8 +527,7 @@ export interface JobPayload {
 //   "jobs": 1
 // }
 
-
-export interface Business { 
+export interface Business {
   id: string;
   createdAt: string;
   updatedAt: string;
@@ -575,11 +551,10 @@ export interface BusinessPayload {
   totalItems: number;
   itemsPerPage: number;
   totalPages: number;
-  currentPage: string; 
+  currentPage: string;
 }
 
 export interface Event {
- 
   title: string;
   description?: string;
   start_date: string;
@@ -591,7 +566,7 @@ export interface Event {
   status?: string;
 }
 
-export interface FetchedEvents extends Event{
+export interface FetchedEvents extends Event {
   id: string;
 }
 // export enum EUserApplicationStatus {
@@ -614,12 +589,11 @@ export interface JobApplicant {
 }
 export interface JobApplicantPayload {
   items: JobApplicant[];
-  itemCount: number;    
+  itemCount: number;
   totalItems: number;
   itemsPerPage: number;
   totalPages: number;
   currentPage: string;
-
 }
 
 export interface InterviewRequestPayload {
@@ -633,6 +607,11 @@ export interface InterviewRequestPayload {
   url: string;
 }
 
+export interface SignAgreementPayload {
+  jobId: string;
+  name?: string;
+  signature?: any;
+}
 
 // {
 //   "success": true,
@@ -647,7 +626,6 @@ export interface InterviewRequestPayload {
 //   "method": "string",
 //   "timestamp": 1617826799860
 // }
-
 
 export interface CandidateStatistics extends Response {
   payload: {

@@ -1,4 +1,3 @@
-
 import { useCalendarApp, ScheduleXCalendar } from "@schedule-x/react";
 import {
   createViewDay,
@@ -22,6 +21,7 @@ import { Event } from "@/types/api";
 import { convertTimeToHoursMinutes } from "@/utils/formatter";
 import EventSkeleton from "@/skeleton/EventSkeleton";
 import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
 function CalendarApp() {
   const eventsService = useState(() => createEventsServicePlugin())[0];
@@ -33,10 +33,12 @@ function CalendarApp() {
   const [isEditModalOpen, setIsEditModalOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isViewModalOpen, setIsViewModalOpen] = useState(false);
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState<any[]>([]);
 
   useEffect(() => {
+    console.log(loggedInUser?.profile);
     if (allEvents || loggedInUser?.profile?.interviews) {
+      console.log("Going to add the event");
       const mapEventData = (event) => ({
         id: event.id,
         title: event.title || event.company_name || "Untitled Event",
@@ -57,6 +59,7 @@ function CalendarApp() {
       const mappedInterviews =
         loggedInUser?.profile?.interviews?.map(mapEventData) || [];
       const combinedEvents = [...mappedAllEvents, ...mappedInterviews];
+      console.log(combinedEvents);
       setEvents(combinedEvents);
       eventsService.set(combinedEvents);
     }

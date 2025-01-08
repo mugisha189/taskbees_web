@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { Table, Button, Select, Rate, Space } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
@@ -39,6 +38,7 @@ const ApplicantTable = () => {
     useApproveForWork(jobID);
   const { mutate: inviteCandidate, isPending: isInvitePending } =
     useCreateInterview();
+
   console.log(jobApplicants);
   const [date, setDate] = useState(null);
   // State to store applicants
@@ -58,9 +58,7 @@ const ApplicantTable = () => {
     setShowAcceptModal(false);
   };
   const handleInviteToInterview = async (data: InterviewRequestPayload) => {
-    console.log("Going to invite");
     await inviteCandidate(data);
-    console.log("Invited candidate");
     setShowAcceptModal(false);
   };
 

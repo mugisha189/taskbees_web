@@ -10,23 +10,24 @@ function Portfolio({
   initialPortfolio,
   handleSubmit,
 }: {
-    uploadedFiles: File[];
-    setUploadedFiles: React.Dispatch<React.SetStateAction<File[]>>;
+  uploadedFiles: File[];
+  setUploadedFiles: React.Dispatch<React.SetStateAction<File[]>>;
   initialPortfolio: Array<{ id: string; name: string; url: string }>;
   handleSubmit: (files: File[], removedIds: string[]) => void;
 }) {
-
-  const {user}=useSelector((state:RootState)=>state.auth)
-  const [existingPortfolio, setExistingPortfolio] = useState(initialPortfolio);
+  const { user } = useSelector((state: RootState) => state.auth);
+  const [existingPortfolio, setExistingPortfolio] = useState(
+    user?.profile.portifolio
+  );
   const [removedIds, setRemovedIds] = useState<string[]>([]);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newFiles = e.target.files ? Array.from(e.target.files) : [];
-    setUploadedFiles((prev:File[]) => [...prev, ...newFiles]);
+    setUploadedFiles((prev: File[]) => [...prev, ...newFiles]);
   };
 
   const handleFileDelete = (index: number) => {
-    setUploadedFiles((prev:File[]) => prev.filter((_, i) => i !== index));
+    setUploadedFiles((prev: File[]) => prev.filter((_, i) => i !== index));
   };
 
   const handleExistingDelete = (id: string) => {
@@ -62,24 +63,29 @@ function Portfolio({
       </div>
 
       {/* Display Existing Portfolio */}
-      {user.profile?.portifolio?.length > 0 && (
+      {user.profile?.portfolio?.length > 0 && (
         <div className="space-y-4">
           <h3 className="text-lg font-semibold">Existing Portfolio</h3>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {existingPortfolio.map((item) => (
+            {user.profile?.portfolio.map((item) => (
               <div
                 key={item.id}
                 className="flex items-center  w-full justify-between gap-4 border p-2 rounded-lg"
               >
                 {/* Display image or string */}
-                {item.url.endsWith(".jpg") || item.url.endsWith(".png") ? (
+                {item.endsWith(".jpg") || item.endsWith(".png") ? (
                   <img
-                    src={item.url}
-                    alt={item.name}
+                    src={item}
+                    alt={item}
                     className="w-16 h-16 object-cover border rounded-md"
                   />
                 ) : (
-                  <p className="text-sm truncate">{item.name}</p>
+                  <div>
+                    <p className="text-sm truncate">
+                      {user?.profile.fullnames}'s Portifolio
+                    </p>
+                    <p className="text-xs truncate ">{item.slice(0, 30)}</p>
+                  </div>
                 )}
                 <button
                   type="button"
