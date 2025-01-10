@@ -10,6 +10,8 @@ export const updateCandidate = async (
   
 ) => {
   const formData = new FormData();
+  console.log("Printed the profile")
+  console.log(data.profile_photo)
 
   formData.append('gender', data.gender);
   formData.append('experience_time', data.experience_time);

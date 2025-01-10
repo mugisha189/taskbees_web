@@ -1,4 +1,3 @@
-
 import { Modal, Form, Input, Select, Button } from "antd";
 import { Formik, Form as FormikForm, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -31,19 +30,19 @@ const InviteToInterviewModal: React.FC<Props> = ({
     duration: Yup.number()
       .required("Duration is required")
       .positive("Duration must be positive"),
-    url: Yup.string()
-      .url("Invalid URL")
-      .test(
-        "url-required-based-on-location",
-        "URL is required for Google Meet or Zoom",
-        function (value) {
-          const { location } = this.parent;
-          if ((location === "GOOGLE" || location === "ZOOM") && !value) {
-            return false; // Fail validation if location requires URL and it's empty
-          }
-          return true; // Pass validation otherwise
-        }
-      ),
+    // url: Yup.string()
+    //   .url("Invalid URL")
+    //   .test(
+    //     "url-required-based-on-location",
+    //     "URL is required for Google Meet or Zoom",
+    //     function (value) {
+    //       const { location } = this.parent;
+    //       if ((location === "GOOGLE" || location === "ZOOM") && !value) {
+    //         return false; // Fail validation if location requires URL and it's empty
+    //       }
+    //       return true; // Pass validation otherwise
+    //     }
+    //   ),
     event_time: Yup.string().required("Event time is required"),
   });
 
@@ -74,7 +73,7 @@ const InviteToInterviewModal: React.FC<Props> = ({
           location: "",
           startDate: null,
           duration: 0,
-          url: "",
+          // url: "",
           event_time: "MINUTES",
           jobId: jobID,
           applicantId: applicant.id,
@@ -93,8 +92,8 @@ const InviteToInterviewModal: React.FC<Props> = ({
               >
                 <Option value="PHYSICAL">Physical</Option>
                 <Option value="OTHER">Other</Option>
-                <Option value="GOOGLE">Google Meet</Option>
-                <Option value="ZOOM">Zoom</Option>
+                {/* <Option value="GOOGLE">Google Meet</Option>
+                <Option value="ZOOM">Zoom</Option> */}
               </Select>
               <ErrorMessage
                 name="location"
@@ -107,7 +106,7 @@ const InviteToInterviewModal: React.FC<Props> = ({
                 type="datetime-local"
                 name="startDate"
                 step={1}
-                value={values.startDate}
+                value={values.startDate as any}
                 onChange={(e) => setFieldValue("startDate", e.target.value)}
                 placeholder="Enter start date"
               />
@@ -149,7 +148,7 @@ const InviteToInterviewModal: React.FC<Props> = ({
                 className="text-red-500 text-sm"
               />
             </Form.Item>
-            {(values.location === "GOOGLE" || values.location === "ZOOM") && (
+            {/* {(values.location === "GOOGLE" || values.location === "ZOOM") && (
               <Form.Item label="URL">
                 <Input
                   name="url"
@@ -163,7 +162,7 @@ const InviteToInterviewModal: React.FC<Props> = ({
                   className="text-red-500 text-sm"
                 />
               </Form.Item>
-            )}
+            )} */}
           </FormikForm>
         )}
       </Formik>
