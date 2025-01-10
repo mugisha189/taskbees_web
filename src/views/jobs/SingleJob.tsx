@@ -16,7 +16,11 @@ const JobDetail = () => {
   );
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="h-full w-full flex items-center justify-center">
+        Loading...
+      </div>
+    );
   }
   if (error) {
     return <div>Error: {error.message}</div>;
@@ -61,8 +65,39 @@ const JobDetail = () => {
                   formatDateReadable(job.application_deadline)}
               </span>
             </p>
-            {job?.has_applied}
-            {!job?.has_applied && (
+            {job?.has_applied ? (
+              (() => {
+                const statusMessages: Record<string, string> = {
+                  ONGOING: "Applied",
+                  REJECTED: "Rejected",
+                  SHORTLISTED: "Shortlisted",
+                  ACCEPTED: "Accepted",
+                  APPROVAL_WORK: "Allowed to work",
+                  ACTIVE: "Active",
+                };
+
+                const statusClasses: Record<string, string> = {
+                  ONGOING: "text-orange-500 bg-orange-300",
+                  REJECTED: "text-red-500 bg-red-300",
+                  SHORTLISTED: "text-blue-500 bg-blue-300",
+                  ACCEPTED: "text-green-500 bg-green-300",
+                  ACTIVE: "text-white bg-green-300",
+                  APPROVAL_WORK: "text-purple-500 bg-purple-300",
+                };
+
+                const message = statusMessages[job.status] || job.status;
+                const statusClass =
+                  statusClasses[job.status] || "text-gray-500";
+
+                return (
+                  <div
+                    className={`capitalize float-right  rounded-[20px] px-4 py-1 mt-5 w-fit font-semibold ${statusClass}`}
+                  >
+                    {message}
+                  </div>
+                );
+              })()
+            ) : (
               <button
                 onClick={handleApplyForJob}
                 disabled={applicationPending}
